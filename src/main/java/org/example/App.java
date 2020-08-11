@@ -109,6 +109,11 @@ public class App
         sendKeys("//input[@data-testid='search-input']", "The Day That Shook Beirut");
         log("Clicking 'GO'");
         click("//button[@data-test-id='search-submit']");
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         assertClick("//h4[contains(text(),'The Day That Shook Beirut')]", "The 'GO' button");
     }
 
@@ -135,20 +140,31 @@ public class App
         }
     }
     private static void  assertClick(String path, String component)  {
-        if(wd.findElement(By.xpath(path)).isDisplayed()){
-            try {
-                currentTest.pass("Successfully clicked: " + component,
-                        MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath("-CLICK-SUCCESS: " + component )).build());
-            } catch (IOException e) {
-                e.printStackTrace();
+        try {
+            if (wd.findElement(By.xpath(path)).isDisplayed()) {
+                try {
+                    currentTest.pass("Successfully clicked: " + component,
+                            MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath("-CLICK-SUCCESS: " + component)).build());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                try {
+                    currentTest.fail("Failed to click: " + component,
+                            MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath("-CLICK-FAILURE: " + component)).build());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
-        }else{
+        } catch (Exception e ){
+
             try {
-                currentTest.fail("Failed to click: " + component,
-                        MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath("-CLICK-FAILURE: " + component )).build());
-            } catch (IOException e) {
-                e.printStackTrace();
+                currentTest.fail("Failed to find: " + component + "trace: " + e,
+                        MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath("-CLICK-FAILURE: " + component)).build());
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
             }
+
         }
     }
 
