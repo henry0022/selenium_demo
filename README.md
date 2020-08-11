@@ -8,7 +8,7 @@ When running this selenium build the following prerequisites need to be met:
 - java environment variables need to be set 
 - ensure that 'App.java' is set as the main class under run/debug configurations
 
-
+I ran this project using IntelliJ.
 
 # Reports
 
