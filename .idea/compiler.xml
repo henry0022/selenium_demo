@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="selenium" />
         <module name="Selenium_Demo" />
+        <module name="selenium_demo" />
       </profile>
     </annotationProcessing>
   </component>
