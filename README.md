@@ -10,6 +10,6 @@ When running this selenium build the following prerequisites need to be met:
 
 
 
-#Reports
+# Reports
 
 Reports are generated as a index.html file after each run. Test steps along with their screenshots. Can be found in base project folder. (open with chrome)
